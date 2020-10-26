@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "410061001352",
+    "firebase_url": "https://rapidfood-apps.firebaseio.com",
+    "project_id": "rapidfood-apps",
+    "storage_bucket": "rapidfood-apps.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:410061001352:android:0fbb05ddb6efd8bb70c53d",
+        "android_client_info": {
+          "package_name": "clientes.rapid.food"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "410061001352-mo28l4tqs432asklkq3hc5ntiv1s16fq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDD0qrBXVhwrLDENmXFeFMDQrHA93TPz0Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "410061001352-mo28l4tqs432asklkq3hc5ntiv1s16fq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:410061001352:android:2f3f87f2ab84555370c53d",
+        "android_client_info": {
+          "package_name": "entregador.rapid.food"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "410061001352-mo28l4tqs432asklkq3hc5ntiv1s16fq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDD0qrBXVhwrLDENmXFeFMDQrHA93TPz0Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "410061001352-mo28l4tqs432asklkq3hc5ntiv1s16fq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:410061001352:android:c9f1d2350952ab0470c53d",
+        "android_client_info": {
+          "package_name": "restaurante.rapid.food"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "410061001352-mo28l4tqs432asklkq3hc5ntiv1s16fq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDD0qrBXVhwrLDENmXFeFMDQrHA93TPz0Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "410061001352-mo28l4tqs432asklkq3hc5ntiv1s16fq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
