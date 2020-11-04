@@ -1324,7 +1324,7 @@ class FunctionsV3
     	  //'pyp'=>t("Paypal"),
     	  'paypal_v2'=>t("Paypal V2"),
     	  'stp'=>t("Stripe"),
-    	  'mcd'=>t("Mercapado"),
+    	  //'mcd'=>t("Mercapado"),
     	  'mercadopago'=>t("mercadopago V2"),
     	  'ide'=>t("Sisow"),
     	  'payu'=>t("Payumoney"),
@@ -2800,31 +2800,6 @@ class FunctionsV3
 		return false;
 	}
 	
-	public static function sticPrettyDate($date='')
-{
-	if (!empty($date)){
-		$date_format=getOptionA('website_date_format');
-		if (empty($date_format)){
-			$date_format="l, M j";
-		}
-		$date = date($date_format,strtotime($date));
-		return Yii::app()->functions->translateDate($date);
-	}
-	return false;
-}
-
-public static function sticPrettyTime($time='')
-{
-	if (!empty($time)){
-		$format=getOptionA('website_time_format');			
-		if(empty($format)){
-			$format="g:i a";
-		}
-		return date($format,strtotime($time));
-	}
-	return false;
-}
-	
 	public static function isMerchantCommission($mtid='')
 	{
 		if ( Yii::app()->functions->isMerchantCommission($mtid)){
@@ -3557,17 +3532,6 @@ public static function sticPrettyTime($time='')
     		self::MerchantpushNewOrder($data['order_id']);
     		FunctionsV3::fastRequest(FunctionsV3::getHostURL().Yii::app()->createUrl("merchantapp/cron/processpush"));
     	}
-    	   
-    	   /*SEND PUSH TO MERCHANT APP V2*/
- if (FunctionsV3::hasModuleAddon("merchantappv2")){    		
-	Yii::app()->setImport(array(			
-	  'application.modules.merchantappv2.components.*',
-	));
-	 OrderWrapper::InsertOrderTrigger(
-	   isset($data['order_id'])?$data['order_id']:'',
-	   'receipt_send_to_merchant'   		   
-	 );
- }
     	    	
     	unset($DbExt);
     }
@@ -4075,21 +4039,6 @@ public static function sticPrettyTime($time='')
 		  'ip_address'=>$_SERVER['REMOTE_ADDR']    		 
 		);	    				
 		$DbExt->insertData("{{sms_broadcast_details}}",$params); 	   	
-		
-		
-		 /*SEND PUSH TO MERCHANT APP V2*/
-if (FunctionsV3::hasModuleAddon("merchantappv2")){    		
-	Yii::app()->setImport(array(			
-	  'application.modules.merchantappv2.components.*',
-	));
-	OrderWrapper::InsertOrderTrigger(
-	   isset($data['booking_id'])?$data['booking_id']:'',
-	   'booked_notify_merchant',
-	   isset($data['booking_notes'])?$data['booking_notes']:'',
-	   'booking'
-	);
-}
-		
 		
 		unset($DbExt);
 		FunctionsV3::runCronEmail();
@@ -6385,14 +6334,10 @@ if (FunctionsV3::hasModuleAddon("merchantappv2")){
 		return false;
 	}
 	
-	
-	
-	
 	public static function notifyCancelOrder($data=array())
 	{
 		if(!is_array($data) && count($data)<=0){
 			return false;
-			
 		}
 		
 		$merchant_id = isset($data['merchant_id'])?$data['merchant_id']:'';
@@ -6434,18 +6379,6 @@ if (FunctionsV3::hasModuleAddon("merchantappv2")){
 	    			}
 	    		}
 	    	}		
-	    
-	    /*SEND PUSH TO MERCHANT APP V2*/
-if (FunctionsV3::hasModuleAddon("merchantappv2")){    		
-	Yii::app()->setImport(array(			
-	  'application.modules.merchantappv2.components.*',
-	));
-	 OrderWrapper::InsertOrderTrigger(
-	   isset($data['order_id'])?$data['order_id']:'',
-	   'order_request_cancel_to_merchant'
-	 );
-}   
-	    
 	    		    		    	
 		}
 		
@@ -8480,6 +8413,7 @@ if (FunctionsV3::hasModuleAddon("merchantappv2")){
 		SELECT $field,count(*)as found FROM {{{$table}}}		
 		WHERE 1
 		$and
+		group by slug
 		LIMIT 0,1
 		";		
 		if($res = Yii::app()->db->createCommand($stmt)->queryRow()){		
@@ -8536,7 +8470,7 @@ if (FunctionsV3::hasModuleAddon("merchantappv2")){
 					      '[tpl]'=>$key
 					    )));
 		    		}	    		    		
-		    		if(!empty($data['email_subject'])){	
+		    		if(empty($data['email_subject'])){	
 		    			throw new Exception( tt("The template [tpl] subject is empty",array(
 					      '[tpl]'=>$key
 					    )));
@@ -8739,7 +8673,7 @@ if (FunctionsV3::hasModuleAddon("merchantappv2")){
 		b.contact_email as customer_email,
 		
 		c.restaurant_name as merchant_name,
-		c.contact_phone as merchant_contact_phone
+		c.restaurant_phone as merchant_contact_phone
 		
 		FROM {{order}} a
 		left join {{order_delivery_address}} b

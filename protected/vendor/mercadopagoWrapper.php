@@ -75,6 +75,14 @@ class mercadopagoWrapper
 		    "pending" => $params['pending'],
 		);
 		$preference->auto_return = "approved";
+		$preference->payment_methods = array(
+		  "excluded_payment_types" => array(
+		    array("id" => "ticket"), 
+		    array("id" => "digital_wallet"),
+		    array("id" => "digital_currency")
+		  ),
+		  "installments" => 12
+		);
 
         $item = new MercadoPago\Item();	    
 	    $item->title = $params['title'];
